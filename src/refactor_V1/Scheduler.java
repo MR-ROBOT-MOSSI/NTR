@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface Scheduler {
 
-	void initialiser(List<User> listusers);
-
+	public void initialiser(List<User> listusers);
+	public UR GestionUR(UR ur);
+	public String getSchedulerName();
+	
 }
