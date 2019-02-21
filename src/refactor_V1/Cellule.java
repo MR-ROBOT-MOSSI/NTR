@@ -57,6 +57,13 @@ public class Cellule {
 				break;
 			case MAXSNR_SCHEDULER :
 				sh = new SchedulerMAXSNR();
+				break;
+			case WFO_SCHEDULER :
+				sh = new SchedulerWFO();
+				break;
+			case OEA_SCHEDULER :
+				sh = new SchedulerOEA();
+				break;
 			default :
 				System.err.println("Scheduler type not define");
 				System.exit(-1);
@@ -89,7 +96,48 @@ public class Cellule {
 	
 	public void simulationCell(int utilisateurs) {
 		
+		this.temps = 0;
+		this.performances.clear();
+		this.performances.add(new LatencePerformance(this));
+		this.performances.add(new URPerformance(this));
+		this.performances.add(new DebitPerformance(this));
+		
+		List<List<UR>> ur = new ArrayList<List<UR>>();
+		List<UR> ur_c = new ArrayList<UR>();
+		UR ur_t;
+		
+		for(PointAcc pa_r : this.pa) {
+			pa_r.initialiser(utilisateurs, sh);
+			ur.add(pa_r.getUr());
+		}
+		while(temps < TEMPS_MAX) {
+			for(PointAcc pa_r : this.pa) {
+				pa_r.userCreatePacket();
+			}
+			for(int i=0; i<PointAcc.NB_TOTAL_UR; i++) {
+				for(List<UR> ur_l : ur) {
+					ur_t = ur_l.get(i);
+					ur_t.clearUR();
+					ur_t = sh.GestionUR(ur_t);
+					ur_c.add(ur_t);
+				}
+				GestionInterference(ur_c);
+				
+				for(List<UR> ur_l : ur) {
+					ur_t = ur_l.get(i);
+					if(ur_t.getUser() != null) {
+						ur_t.getUser().verifPacket();
+					}
+				}
+			}
+			for(Performance p : performances) {
+				p.PerformanceCell();
+			}
+			++temps;
+		}
+		for(Performance p : performances) {
+			p.Resultats(utilisateurs);
+		}
 	}
 
-}
-
+}s
