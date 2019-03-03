@@ -21,9 +21,9 @@ public class User {
 		this.pointacc = pointAcc;
 		buf = new LinkedList<Packet>();
 		if(distance) {
-			debitglobal = 8;
+			debitglobal = 6;
 		}else {
-			debitglobal = 4;
+			debitglobal = 3;
 		}
 	}
 
@@ -37,7 +37,7 @@ public class User {
 
 	private boolean randomBoolean() {
 		// TODO Auto-generated method stub
-		return (Math.random() < 0.15);
+		return (Math.random() < 0.25);
 	}
 	
 
@@ -59,7 +59,7 @@ public class User {
 		return distance;
 	}
 	
-	private Packet getPacketCourant() {
+	Packet getPacketCourant() {
 		// TODO Auto-generated method stub
 		return buf.peek();
 	}
@@ -67,19 +67,19 @@ public class User {
 	public void verifPacket() {
 		Packet packet = this.getPacketCourant();
 		if(packet != null) {
-			int bitsrestant = packet.getPacketNbBitsRestant() - debitinstantT;
+			int bitsrestant = packet.getNbbistrestant() - debitinstantT;
 			if(bitsrestant <= 0) {
-				packet.setPacketNbBitsRestant(0);
+				packet.setNbbistrestant(0);
 				this.packetTraitementFini();
 			}else {
-				packet.setPacketNbBitsRestant(bitsrestant);
+				packet.setNbbistrestant(bitsrestant);
 			}
 		}
 	}
 
 	private void packetTraitementFini() {
 		// TODO Auto-generated method stub
-		getPacketCourant().setTransmissionFini(pointacc.getTemps());
+		getPacketCourant().setTempsfinenvoi(pointacc.getTemps());
 		this.packet.add(getPacketCourant());
 		buf.removeFirst();
 	}
@@ -96,5 +96,8 @@ public class User {
 	public void elementInterference() {
 		debitinstantT = debitinstantT/2;
 	}
+	 public List<Packet> getPacket(){
+		 return this.packet;
+	 }
 
 }

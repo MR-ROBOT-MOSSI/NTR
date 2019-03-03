@@ -5,7 +5,11 @@ import java.util.List;
 
 public class PointAcc {
 	
-	static final int NB_TOTAL_UR = 256;
+	public static final int NB_TOTAL_UR = 128;
+	//table à double dimension 
+	//plusieur time slot 5 * 5
+	//128 ur par timeslot
+	//digramme énergetique à ajouter
 	private List<UR> listur;
 	private List<User> listusers;
 	private Cellule cell;

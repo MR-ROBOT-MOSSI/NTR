@@ -2,7 +2,7 @@ package refactor_V1;
 
 public class Packet {
 
-	static final int TAILLE_PACKET = 62;
+	static final int TAILLE_PACKET = 100;
 	private int tempscreation;
 	private int tempsdebutenvoi;
 	private int tempsfinenvoi;
@@ -11,28 +11,13 @@ public class Packet {
 	
 	public Packet(User user, int temps) {
 		// TODO Auto-generated constructor stub
-		this.setNbbistrestant(TAILLE_PACKET);
-		this.setTempscreation(temps);
-		this.setUser(user);
-	}
-
-	public int getPacketNbBitsRestant() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void setPacketNbBitsRestant(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setTransmissionFini(int temps) {
-		// TODO Auto-generated method stub
-		
+		this.nbbistrestant = TAILLE_PACKET;
+		this.tempscreation = temps;
+		this.user = user;
 	}
 
 	public int getTempscreation() {
-		return tempscreation;
+		return this.tempscreation;
 	}
 
 	public void setTempscreation(int tempscreation) {
@@ -40,7 +25,7 @@ public class Packet {
 	}
 
 	public int getTempsdebutenvoi() {
-		return tempsdebutenvoi;
+		return this.tempsdebutenvoi;
 	}
 
 	public void setTempsdebutenvoi(int tempsdebutenvoi) {
@@ -48,7 +33,7 @@ public class Packet {
 	}
 
 	public int getTempsfinenvoi() {
-		return tempsfinenvoi;
+		return this.tempsfinenvoi;
 	}
 
 	public void setTempsfinenvoi(int tempsfinenvoi) {
@@ -56,19 +41,11 @@ public class Packet {
 	}
 
 	public int getNbbistrestant() {
-		return nbbistrestant;
+		return this.nbbistrestant;
 	}
 
 	public void setNbbistrestant(int nbbistrestant) {
 		this.nbbistrestant = nbbistrestant;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }

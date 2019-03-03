@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Cellule {
 
-	public static final int TEMPS_MAX = 250;
+	public static final int TEMPS_MAX = 200;
 	public static final int RR_SCHEDULER = 1;
 	public static final int MAXSNR_SCHEDULER = 2;
 	public static final int WFO_SCHEDULER = 3;
@@ -18,10 +18,10 @@ public class Cellule {
 	private List<Performance> performances;
 	
 	public Cellule() {
-		this.temps = 0;
-		this.nbPointAcc = 0;
-		this.pa = new ArrayList<PointAcc>();
-		this.performances = new ArrayList<Performance>();
+		temps = 0;
+		nbPointAcc = 0;
+		pa = new ArrayList<PointAcc>();
+		performances = new ArrayList<Performance>();
 	}
 
 	public int getTemps() {
@@ -45,7 +45,7 @@ public class Cellule {
 	}
 	
 	public boolean addPointAcc() {
-		this.pa.add(new PointAcc(this));
+		pa.add(new PointAcc(this));
 		++nbPointAcc;
 		return (pa.get(nbPointAcc - 1) != null);
 	}
@@ -94,24 +94,25 @@ public class Cellule {
 		}
 	}
 	
+	
 	public void simulationCell(int utilisateurs) {
 		
-		this.temps = 0;
-		this.performances.clear();
-		this.performances.add(new LatencePerformance(this));
-		this.performances.add(new URPerformance(this));
-		this.performances.add(new DebitPerformance(this));
+		temps = 0;
+		performances.clear();
+		performances.add(new LatencePerformance(this));
+		performances.add(new URPerformance(this));
+		performances.add(new DebitPerformance(this));
 		
 		List<List<UR>> ur = new ArrayList<List<UR>>();
 		List<UR> ur_c = new ArrayList<UR>();
 		UR ur_t;
 		
-		for(PointAcc pa_r : this.pa) {
+		for(PointAcc pa_r : pa) {
 			pa_r.initialiser(utilisateurs, sh);
 			ur.add(pa_r.getUr());
 		}
 		while(temps < TEMPS_MAX) {
-			for(PointAcc pa_r : this.pa) {
+			for(PointAcc pa_r : pa) {
 				pa_r.userCreatePacket();
 			}
 			for(int i=0; i<PointAcc.NB_TOTAL_UR; i++) {
@@ -140,4 +141,4 @@ public class Cellule {
 		}
 	}
 
-}s
+}

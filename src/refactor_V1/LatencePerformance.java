@@ -11,7 +11,7 @@ public class LatencePerformance implements Performance {
 	public LatencePerformance(Cellule cellule) {
 		this.cellule = cellule;
 		this.latence = new HashMap<PointAcc, Integer>();
-		for(PointAcc pa : Cellule.getPointAcc())
+		for(PointAcc pa : cellule.getPointAcc())
 			this.latence.put(pa, 0);
 	}
 	
@@ -59,7 +59,7 @@ public class LatencePerformance implements Performance {
 		
 		for(PointAcc pa : latence.keySet()) {
 			rt = latence.get(pa) / (Cellule.TEMPS_MAX * 2);
-			fileName = cellule.getNbPointAcc() + "_cell_" + cellule.getAllocation().getName() + "_latence_of_cell_nb" + idPA + ".csv";
+			fileName = cellule.getNbPointAcc() + "_cell_" + cellule.getAllocation().getSchedulerName() + "_latence_of_cell_nb" + idPA + ".csv";
 			try {
 				file = new File(fileName);
 				file.createNewFile();
