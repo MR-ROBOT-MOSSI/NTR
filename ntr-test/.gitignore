@@ -1,0 +1,11 @@
+/bin/
+.idea/
+ntr.iml
+NTR_project.iml
+../../.DS_Store
+../.DS_Store
+src/RR_Latence_of_cell_nb.csv
+src/RR_URUtilise_of_cell_nb.csv
+src/RR_debit_of_cell_nb.csv
+src/RR_energie_of_cell_nb.csv
+.DS_Store
